@@ -13,11 +13,15 @@ import androidx.compose.ui.unit.dp
 import com.pnc.jetpackcomposedemos.ui.theme.JetpackComposeDemosTheme
 
 @Composable
-fun BoardMemberCard(member: BoardMember) {
+fun BoardMemberCard(
+    member: BoardMember,
+    onClick: () -> Unit = {}
+) {
 
     Card(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxWidth(),
+        onClick = onClick
     ) {
         Column(
             modifier = Modifier.padding(16.dp)
