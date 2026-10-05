@@ -1,4 +1,4 @@
-package com.pnc.jetpackcomposedemos
+package com.pnc.jetpackcomposedemos.core
 
 import kotlinx.serialization.Serializable
 

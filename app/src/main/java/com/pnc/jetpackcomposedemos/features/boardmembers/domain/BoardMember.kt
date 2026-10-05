@@ -1,4 +1,4 @@
-package com.pnc.jetpackcomposedemos
+package com.pnc.jetpackcomposedemos.features.boardmembers.domain
 
 data class BoardMember (
     val id: Int,
@@ -52,5 +52,3 @@ data class BoardMember (
 
 
 }
-
-

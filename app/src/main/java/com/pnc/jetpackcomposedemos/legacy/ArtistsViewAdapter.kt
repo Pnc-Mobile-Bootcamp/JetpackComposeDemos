@@ -1,10 +1,11 @@
-package com.pnc.jetpackcomposedemos
+package com.pnc.jetpackcomposedemos.legacy
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.pnc.jetpackcomposedemos.databinding.LegacyArtistCardBinding
+import com.pnc.jetpackcomposedemos.features.artists.domain.Artist
 
 class ArtistsViewAdapter(
     private val artists: List<Artist>,
@@ -43,6 +44,3 @@ class ArtistsViewAdapter(
 
 
 }
-
-
-

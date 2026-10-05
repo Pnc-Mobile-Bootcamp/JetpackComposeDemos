@@ -1,6 +1,7 @@
-package com.pnc.jetpackcomposedemos
+package com.pnc.jetpackcomposedemos.legacy
 
 import androidx.recyclerview.widget.RecyclerView
+import com.pnc.jetpackcomposedemos.features.artists.domain.Artist
 import com.pnc.jetpackcomposedemos.databinding.LegacyArtistCardBinding
 
 class ArtistCardViewHolder(
@@ -20,4 +21,3 @@ class ArtistCardViewHolder(
     }
 
 }
-

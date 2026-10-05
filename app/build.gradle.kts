@@ -61,4 +61,5 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.material.icons)
     implementation(libs.androidx.compose.material3.adaptive)
+    implementation(libs.bundles.lifecycle)
 }

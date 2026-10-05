@@ -1,4 +1,4 @@
-package com.pnc.jetpackcomposedemos
+package com.pnc.jetpackcomposedemos.features.boardmembers.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.Column
@@ -10,6 +10,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.fromHtml
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.pnc.jetpackcomposedemos.features.boardmembers.domain.BoardMember
 
 @Composable
 fun BoardMemberDetails(boardMember: BoardMember) {

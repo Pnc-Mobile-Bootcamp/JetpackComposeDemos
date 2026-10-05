@@ -1,4 +1,4 @@
-package com.pnc.jetpackcomposedemos
+package com.pnc.jetpackcomposedemos.features.artists.domain
 
 data class Artist (
     val id: Int,
@@ -89,4 +89,3 @@ data class Artist (
 
 
 }
-

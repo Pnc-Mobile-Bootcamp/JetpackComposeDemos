@@ -1,4 +1,6 @@
-package com.pnc.jetpackcomposedemos
+package com.pnc.jetpackcomposedemos.features.artists.presentation.state
+
+import com.pnc.jetpackcomposedemos.features.artists.domain.Artist
 
 data class ArtistDirectoryState(
     val artists: List<Artist> = emptyList(),
@@ -19,7 +21,3 @@ data class ArtistDirectoryState(
         get() = artists.find { it.id == selectedArtistId }
 
 }
-
-
-
-
