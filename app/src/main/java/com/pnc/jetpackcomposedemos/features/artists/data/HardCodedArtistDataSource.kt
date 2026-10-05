@@ -1,6 +1,10 @@
 package com.pnc.jetpackcomposedemos.features.artists.data
 
-class HardCodedArtistDataSource : ArtistDataSource {
+import javax.inject.Inject
+import javax.inject.Singleton
+
+@Singleton
+class HardCodedArtistDataSource @Inject constructor() : ArtistDataSource {
 
     override suspend fun getArtists(): List<ArtistDto> {
 

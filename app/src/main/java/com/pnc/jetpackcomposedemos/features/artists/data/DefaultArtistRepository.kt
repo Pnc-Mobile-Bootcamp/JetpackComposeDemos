@@ -2,9 +2,12 @@ package com.pnc.jetpackcomposedemos.features.artists.data
 
 import com.pnc.jetpackcomposedemos.features.artists.domain.Artist
 import com.pnc.jetpackcomposedemos.features.artists.domain.ArtistRepository
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class DefaultArtistRepository(
-    private val dataSource: ArtistDataSource = HardCodedArtistDataSource()
+@Singleton
+class DefaultArtistRepository @Inject constructor(
+    private val dataSource: ArtistDataSource
 ): ArtistRepository {
 
     override suspend fun getArtists(): List<Artist> {
