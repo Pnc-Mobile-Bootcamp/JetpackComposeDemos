@@ -7,6 +7,8 @@ import com.pnc.jetpackcomposedemos.features.artists.data.RandomArtistDataSource
 import com.pnc.jetpackcomposedemos.features.artists.domain.ArtistRepository
 import com.pnc.jetpackcomposedemos.features.orders.data.DefaultOrderRepository
 import com.pnc.jetpackcomposedemos.features.orders.domain.OrderRepository
+import com.pnc.jetpackcomposedemos.features.todo.data.DefaultToDoRepository
+import com.pnc.jetpackcomposedemos.features.todo.domain.ToDoRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -27,6 +29,13 @@ abstract class AppInjectionModule {
     abstract fun bindOrdersRepository(
         implementation: DefaultOrderRepository
     ): OrderRepository
+
+    @Binds
+    abstract fun bindToDoRepository(
+        implementation: DefaultToDoRepository
+    ): ToDoRepository
+
+
 
 
 }

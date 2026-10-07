@@ -16,7 +16,8 @@ import androidx.compose.ui.unit.dp
 fun EventPlanningDashboard(
     onViewArtists: () -> Unit,
     onViewBoardMembers: () -> Unit,
-    onViewOrders: () -> Unit
+    onViewOrders: () -> Unit,
+    onViewToDos: () -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize().padding(16.dp),
@@ -46,6 +47,13 @@ fun EventPlanningDashboard(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("View Orders")
+        }
+
+        Button(
+            onClick = onViewToDos,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("View To-Dos")
         }
 
     }

@@ -73,4 +73,7 @@ dependencies {
     implementation(libs.hilt.navigation)
     implementation(libs.bundles.retrofit)
     implementation(libs.bundles.okhttp)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
 }

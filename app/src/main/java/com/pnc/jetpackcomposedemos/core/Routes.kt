@@ -34,6 +34,8 @@ data object LegacyArtistListRoute: EventPlannerRoute
 data object OrdersRoute: EventPlannerRoute
 
 
+@Serializable
+data object ToDosRoute: EventPlannerRoute
 
 
 
