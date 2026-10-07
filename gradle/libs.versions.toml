@@ -15,6 +15,9 @@ recyclerview = "1.4.0"
 animation = "1.12.1"
 lifecycle = "2.11.0"
 hiltVersion = "2.60.1"
+retrofitVersion = "3.0.0"
+okhttpVersion = "5.5.0"
+foundationLayout = "1.12.1"
 
 
 [libraries]
@@ -46,10 +49,19 @@ androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltVersion"}
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hiltVersion"}
 hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version = "1.4.0" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
+retrofit-converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttpVersion" }
+okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpVersion" }
+androidx-compose-foundation-layout = { group = "androidx.compose.foundation", name = "foundation-layout", version.ref = "foundationLayout" }
+
 
 [bundles]
 coil = [ "coil-compose", "coil-loader" ]
 lifecycle = [ "androidx-lifecycle-runtime", "androidx-lifecycle-viewmodel" ]
+retrofit = [ "retrofit", "retrofit-converter" ]
+okhttp = [ "okhttp", "okhttp-logging-interceptor" ]
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

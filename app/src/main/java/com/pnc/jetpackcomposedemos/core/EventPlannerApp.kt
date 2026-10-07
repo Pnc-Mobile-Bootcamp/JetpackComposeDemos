@@ -1,5 +1,6 @@
 package com.pnc.jetpackcomposedemos.core
 
+import android.util.Log
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
@@ -11,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import androidx.window.core.layout.WindowSizeClass
+import com.pnc.jetpackcomposedemos.BuildConfig
 import com.pnc.jetpackcomposedemos.features.artists.domain.Artist
 import com.pnc.jetpackcomposedemos.features.artists.presentation.composables.ArtistDetails
 import com.pnc.jetpackcomposedemos.features.artists.presentation.composables.ArtistDirectoryRoute
@@ -20,6 +22,7 @@ import com.pnc.jetpackcomposedemos.features.auth.presentation.LoginScreen
 import com.pnc.jetpackcomposedemos.features.boardmembers.domain.BoardMember
 import com.pnc.jetpackcomposedemos.features.boardmembers.presentation.BoardMemberDetails
 import com.pnc.jetpackcomposedemos.features.boardmembers.presentation.BoardMemberList
+import com.pnc.jetpackcomposedemos.features.orders.presentation.OrdersScreen
 import com.pnc.jetpackcomposedemos.legacy.LegacyArtistList
 
 @Composable
@@ -57,8 +60,8 @@ fun EventPlannerApp(
                         onViewBoardMembers = {
                             navController.navigate(BoardMemberListRoute)
                         },
-                        onLegacyArtists = {
-                            navController.navigate(LegacyArtistListRoute)
+                        onViewOrders = {
+                            navController.navigate(OrdersRoute)
                         }
                     )
                 }
@@ -110,15 +113,10 @@ fun EventPlannerApp(
                     }
                 }
 
+                composable<OrdersRoute> {
+                    OrdersScreen(useTwoPaneLayout = useTwoPaneLayout)
+                }
 
-//                composable<LegacyArtistListRoute> {
-//                    LegacyArtistList(
-//                        artists = artists,
-//                        onArtistSelected = { artistId ->
-//                            navController.navigate(ArtistDetailsRoute(artistId))
-//                        }
-//                    )
-//                }
 
             }
         }

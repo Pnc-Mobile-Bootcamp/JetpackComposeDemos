@@ -5,6 +5,8 @@ import com.pnc.jetpackcomposedemos.features.artists.data.DefaultArtistRepository
 import com.pnc.jetpackcomposedemos.features.artists.data.HardCodedArtistDataSource
 import com.pnc.jetpackcomposedemos.features.artists.data.RandomArtistDataSource
 import com.pnc.jetpackcomposedemos.features.artists.domain.ArtistRepository
+import com.pnc.jetpackcomposedemos.features.orders.data.DefaultOrderRepository
+import com.pnc.jetpackcomposedemos.features.orders.domain.OrderRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,16 +17,17 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 abstract class AppInjectionModule {
 
-    @Binds
-    @Singleton
-    abstract fun bindArtistDataSource(
-        implementation: RandomArtistDataSource
-    ): ArtistDataSource
 
     @Binds
     abstract fun bindArtistRepository(
         implementation: DefaultArtistRepository
     ): ArtistRepository
+
+    @Binds
+    abstract fun bindOrdersRepository(
+        implementation: DefaultOrderRepository
+    ): OrderRepository
+
 
 }
 
