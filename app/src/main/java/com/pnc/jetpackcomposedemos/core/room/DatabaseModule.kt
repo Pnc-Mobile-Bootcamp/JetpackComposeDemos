@@ -2,6 +2,7 @@ package com.pnc.jetpackcomposedemos.core.room
 
 import android.content.Context
 import androidx.room.Room
+import com.pnc.jetpackcomposedemos.features.orders.data.local.OrderDao
 import com.pnc.jetpackcomposedemos.features.todo.data.ToDoDao
 import dagger.Module
 import dagger.Provides
@@ -30,4 +31,12 @@ class DatabaseModule {
         return database.toDoDao()
     }
 
+    @Provides
+    @Singleton
+    fun provideOrderDao(database: AppDatabase): OrderDao {
+        return database.orderDao()
+    }
+
 }
+
+
