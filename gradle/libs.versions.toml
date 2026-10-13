@@ -19,6 +19,7 @@ retrofitVersion = "3.0.0"
 okhttpVersion = "5.5.0"
 foundationLayout = "1.12.1"
 roomVersion = "2.8.5"
+uiTest = "1.12.1"
 
 
 [libraries]
@@ -58,6 +59,10 @@ androidx-compose-foundation-layout = { group = "androidx.compose.foundation", na
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomVersion" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomVersion" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version = "1.11.0" }
+turbine = { group = "app.cash.turbine", name = "turbine", version = "1.2.1" }
+espresso-contrib = { group = "androidx.test.espresso", name = "espresso-contrib", version.ref = "espressoCore" }
+androidx-compose-ui-test = { group = "androidx.compose.ui", name = "ui-test", version.ref = "uiTest" }
 
 
 

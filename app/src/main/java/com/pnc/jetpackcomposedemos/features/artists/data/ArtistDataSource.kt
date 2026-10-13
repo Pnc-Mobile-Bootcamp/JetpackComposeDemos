@@ -4,7 +4,7 @@ interface ArtistDataSource {
 
     suspend fun getArtists(): List<ArtistDto>
 
-    suspend fun getArtist(id: Int): ArtistDto?
+    suspend fun getArtist(id: Int): ArtistDto
 
 }
 

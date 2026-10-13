@@ -6,6 +6,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.pnc.jetpackcomposedemos.features.artists.data.local.ArtistDao
+import com.pnc.jetpackcomposedemos.features.artists.data.local.ArtistEntity
 import com.pnc.jetpackcomposedemos.features.todo.data.ToDoDao
 import com.pnc.jetpackcomposedemos.features.todo.data.ToDoEntity
 import com.pnc.jetpackcomposedemos.features.orders.data.local.LineItemEntity
@@ -16,12 +18,14 @@ import com.pnc.jetpackcomposedemos.features.orders.data.local.OrderEntity
     entities = [
         ToDoEntity::class,
         OrderEntity::class,
-        LineItemEntity::class
+        LineItemEntity::class,
+        ArtistEntity::class
         ],
-    version = 2,
+    version = 3,
     exportSchema = true,
     autoMigrations = [
-        AutoMigration(from = 1, to = 2)
+        AutoMigration(from = 1, to = 2),
+        AutoMigration(from = 2, to = 3)
     ]
 )
 @TypeConverters(Converters::class)
@@ -29,6 +33,7 @@ abstract class AppDatabase: RoomDatabase() {
 
     abstract fun toDoDao(): ToDoDao
     abstract fun orderDao(): OrderDao
+    abstract fun artistDao(): ArtistDao
 
     companion object {
         @Volatile   // don't let background threads cache the null value
