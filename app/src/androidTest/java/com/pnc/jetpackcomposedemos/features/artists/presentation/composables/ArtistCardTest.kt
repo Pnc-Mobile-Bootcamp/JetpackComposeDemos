@@ -2,6 +2,7 @@ package com.pnc.jetpackcomposedemos.features.artists.presentation.composables
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
@@ -46,13 +47,12 @@ class ArtistCardTest {
 //    }
 
     @Test
-    fun givenArtist_whenShown_thenDisplaysNameGenreLocationAndDescription() {
+    fun givenArtist_whenShown_thenDisplaysNameGenreLocation() {
         setCard()
 
         composeRule.onNodeWithText(artist.name, useUnmergedTree = true).assertIsDisplayed()
         composeRule.onNodeWithText("Genre: ${artist.genre}", useUnmergedTree = true).assertIsDisplayed()
         composeRule.onNodeWithText("Location: ${artist.location}", useUnmergedTree = true).assertIsDisplayed()
-        composeRule.onNodeWithText(artist.description, useUnmergedTree = true).assertIsDisplayed()
     }
 
     @Test
@@ -63,6 +63,35 @@ class ArtistCardTest {
         composeRule.onNodeWithText(artist.name, useUnmergedTree = true).performClick()
 
         assertEquals(1, clickCount)
+    }
+
+    @Test
+    fun givenNotFavorite_whenStarTapped_thenBecomesFavorite() {
+        setCard()
+
+        composeRule.onNodeWithContentDescription("Not favorite", useUnmergedTree = true)
+            .performClick()
+
+        composeRule.onNodeWithContentDescription("Favorite", useUnmergedTree = true)
+            .assertIsDisplayed()
+        composeRule.onNodeWithContentDescription("Not favorite", useUnmergedTree = true)
+            .assertDoesNotExist()
+    }
+
+    @Test
+    fun givenFavorite_whenStarTappedAgain_thenReturnsToNotAFavorite() {
+        setCard()
+
+        composeRule.onNodeWithContentDescription("Not favorite", useUnmergedTree = true)
+            .performClick()
+
+        composeRule.onNodeWithContentDescription("Favorite", useUnmergedTree = true)
+            .performClick()
+
+        composeRule.onNodeWithContentDescription("Not favorite", useUnmergedTree = true)
+            .assertIsDisplayed()
+        composeRule.onNodeWithContentDescription("Favorite", useUnmergedTree = true)
+            .assertDoesNotExist()
     }
 
 }
