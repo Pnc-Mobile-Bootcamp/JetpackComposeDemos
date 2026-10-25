@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
@@ -17,6 +19,12 @@ class AuthViewModel @Inject constructor(
 ): ViewModel() {
 
     val uiState: StateFlow<AuthState> = session.state
+
+    init {
+        viewModelScope.launch {
+            session.restore()
+        }
+    }
 
     fun login(user: User) = session.signIn(user)
 
