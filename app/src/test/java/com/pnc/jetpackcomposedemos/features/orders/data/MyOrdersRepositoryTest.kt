@@ -1,9 +1,12 @@
 package com.pnc.jetpackcomposedemos.features.orders.data
 
+import com.pnc.jetpackcomposedemos.features.auth.data.storage.FakeTokenStore
 import com.pnc.jetpackcomposedemos.features.auth.domain.SessionManager
 import com.pnc.jetpackcomposedemos.features.auth.domain.User
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
@@ -31,7 +34,10 @@ class MyOrdersRepositoryTest {
     }
 
     private val dataSource = RecordingDataSource()
-    private val session = SessionManager()
+    private val session = SessionManager(
+        FakeTokenStore(),
+        CoroutineScope(Dispatchers.Unconfined)
+    )
     private val repository = MyOrdersRepository(dataSource, session)
 
 
@@ -55,6 +61,12 @@ class MyOrdersRepositoryTest {
         assertEquals(null, dataSource.requestedCustomerId)
     }
 
+    @Test
+    fun `a non-numeric user id is rejected`() = runTest {
+        session.signIn(User(id = "abc", username = "X", token = "t"))
+
+        assertTrue(runCatching { repository.getOrders() }.isFailure)
+    }
 
 }
 

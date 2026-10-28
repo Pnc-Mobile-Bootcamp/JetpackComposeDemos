@@ -1,39 +1,33 @@
 package com.pnc.jetpackcomposedemos.core
 
-import android.util.Log
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import androidx.window.core.layout.WindowSizeClass
-import com.pnc.jetpackcomposedemos.BuildConfig
-import com.pnc.jetpackcomposedemos.features.artists.domain.Artist
 import com.pnc.jetpackcomposedemos.features.artists.presentation.composables.ArtistDetails
 import com.pnc.jetpackcomposedemos.features.artists.presentation.composables.ArtistDirectoryRoute
 import com.pnc.jetpackcomposedemos.features.auth.domain.AuthState
 import com.pnc.jetpackcomposedemos.features.auth.presentation.AuthViewModel
-import com.pnc.jetpackcomposedemos.features.auth.presentation.LoginScreen
 import com.pnc.jetpackcomposedemos.features.auth.presentation.SignInScreen
 import com.pnc.jetpackcomposedemos.features.boardmembers.domain.BoardMember
 import com.pnc.jetpackcomposedemos.features.boardmembers.presentation.BoardMemberDetails
 import com.pnc.jetpackcomposedemos.features.boardmembers.presentation.BoardMemberList
 import com.pnc.jetpackcomposedemos.features.orders.presentation.OrdersScreen
 import com.pnc.jetpackcomposedemos.features.todo.presentation.ToDosScreen
-import com.pnc.jetpackcomposedemos.legacy.LegacyArtistList
 
 @Composable
 fun EventPlannerApp(
     viewModel: AuthViewModel = hiltViewModel()
 ) {
-    val authState by viewModel.uiState.collectAsState()
+    val authState by viewModel.uiState.collectAsStateWithLifecycle()
 
     val windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass
     val useTwoPaneLayout = windowSizeClass.isWidthAtLeastBreakpoint(
