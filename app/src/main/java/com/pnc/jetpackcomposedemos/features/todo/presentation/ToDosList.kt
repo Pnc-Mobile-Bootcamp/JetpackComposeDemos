@@ -26,7 +26,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.pnc.jetpackcomposedemos.R
 import com.pnc.jetpackcomposedemos.features.todo.domain.ToDo
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -54,7 +56,7 @@ fun ToDosList(
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = "Add a new to-do item"
+                    contentDescription = stringResource(R.string.todo_add_item)
                 )
             }
         }
@@ -86,7 +88,7 @@ fun ToDosList(
                     value = newText,
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     onValueChange = { newText = it },
-                    label = { Text("New to-do") }
+                    label = { Text(stringResource(R.string.todo_new_hint)) }
                 )
 
                 Button(
@@ -97,7 +99,7 @@ fun ToDosList(
                     },
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                 ) {
-                    Text("Add")
+                    Text(stringResource(R.string.common_add))
                 }
             }
         }
