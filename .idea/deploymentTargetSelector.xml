@@ -35,7 +35,7 @@
         </DropdownSelection>
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="EventPlanningDashboardTest">
+      <SelectionState runConfigName="PagedOrdersScreenIntegrationTest">
         <option name="selectionMode" value="DROPDOWN" />
         <DropdownSelection timestamp="2026-09-30T12:51:15.522592100Z">
           <Target type="DEFAULT_BOOT">
