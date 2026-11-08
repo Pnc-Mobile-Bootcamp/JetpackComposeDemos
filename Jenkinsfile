@@ -17,6 +17,11 @@ pipeline {
     }
 
     stages {
+        stage('Wipe workspace') {
+            steps {
+                cleanWs()
+            }
+        }
         stage('Check tools') {
             steps {
                 bat 'java -version'
