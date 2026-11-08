@@ -22,30 +22,30 @@ pipeline {
                 bat 'whoami'
             }
         }
-        stage('Check tools') {
-            steps {
-                bat 'java -version'
-                bat 'echo ANDROID_HOME=%ANDROID_HOME%'
-                script {
-                    if (!env.ANDROID_HOME) {
-                        error 'ANDROID_HOME is not set. See Demo 0, step 5.'
-                    }
-                }
-                bat "${GRADLE} --version"
-            }
-        }
+//         stage('Check tools') {
+//             steps {
+//                 bat 'java -version'
+//                 bat 'echo ANDROID_HOME=%ANDROID_HOME%'
+//                 script {
+//                     if (!env.ANDROID_HOME) {
+//                         error 'ANDROID_HOME is not set. See Demo 0, step 5.'
+//                     }
+//                 }
+//                 bat "${GRADLE} --version"
+//             }
+//         }
 
-        stage('Build debug APK') {
-            steps {
-                bat "${GRADLE} assembleDebug"
-            }
-            post {
-                success {
-                    archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk',
-                    fingerprint: true
-                }
-            }
-        }
+//         stage('Build debug APK') {
+//             steps {
+//                 bat "${GRADLE} assembleDebug"
+//             }
+//             post {
+//                 success {
+//                     archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk',
+//                     fingerprint: true
+//                 }
+//             }
+//         }
 
     }
 
