@@ -17,6 +17,11 @@ pipeline {
     }
 
     stages {
+        stage('Service Identity'){
+            steps {
+                bat 'whoami'
+            }
+        }
         stage('Check tools') {
             steps {
                 bat 'java -version'
