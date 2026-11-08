@@ -17,11 +17,6 @@ pipeline {
     }
 
     stages {
-//         stage('Service Identity'){
-//             steps {
-//                 bat 'whoami'
-//             }
-//         }
         stage('Check tools') {
             steps {
                 bat 'java -version'
@@ -43,6 +38,20 @@ pipeline {
                 success {
                     archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk',
                     fingerprint: true
+                }
+            }
+        }
+
+        stage('Unit tests') {
+            steps {
+                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
+                    bat "${GRADLE} testDebugUnitTest"
+                }
+            }
+            post {
+                always {
+                    junit testResults: 'app/build/test-results/testDebugUnitTest/*.xml',
+                    allowEmptyResults: false
                 }
             }
         }
