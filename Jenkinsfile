@@ -17,11 +17,6 @@ pipeline {
     }
 
     stages {
-//        stage('clean workspace') {
-//            steps {
-//                cleanWs()
-//            }
-//        }
         stage('Check tools') {
             steps {
                 bat 'java -version'
@@ -32,6 +27,18 @@ pipeline {
                     }
                 }
                 bat "${GRADLE} --version"
+            }
+        }
+        stage('Unit tests') {
+            steps {
+                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
+                    bat "${GRADLE} testDebugUnitTest"
+                }
+            }
+            post {
+                always {
+                    junit testResults: 'app/build/test-results/testDebugUnitTest/*.xml', allowEmptyResults: false
+                }
             }
         }
         stage('Build debug APK') {
