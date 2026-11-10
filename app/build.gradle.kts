@@ -23,6 +23,10 @@ android {
         version = release(37)
     }
 
+    lint {
+        checkTestSources = false
+    }
+
     defaultConfig {
         applicationId = "com.pnc.jetpackcomposedemos"
         minSdk = 26
