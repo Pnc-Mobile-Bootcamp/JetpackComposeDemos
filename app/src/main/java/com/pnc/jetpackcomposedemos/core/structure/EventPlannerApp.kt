@@ -4,6 +4,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
@@ -23,10 +24,7 @@ fun EventPlannerApp(
         WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND
     )
 
-    val navController = rememberNavController()
-
-
-    when (authState) {
+    when (val state = authState) {
         is AuthState.Restoring -> {
             FullScreenBox {
                 CircularProgressIndicator()
@@ -40,14 +38,22 @@ fun EventPlannerApp(
             }
         }
         is AuthState.Authenticated -> {
-            AppNavigationShell(navController = navController) {
-                AppNavHost(
-                    navController = navController,
-                    useTwoPaneLayout = useTwoPaneLayout,
-                    onSignOut = {
-                        viewModel.logout()
-                    }
-                )
+            // One NavController per signed-in customer. If it lived outside this branch it would
+            // outlive the sign-out, and with it the old back stack, the saved tab state and the
+            // ViewModels scoped to those screens (e.g. the previous user's loaded orders).
+            // The key is the user id, NOT the whole user: a token refresh replaces the User object
+            // but must not reset navigation.
+            key(state.user.id) {
+                val navController = rememberNavController()
+                AppNavigationShell(navController = navController) {
+                    AppNavHost(
+                        navController = navController,
+                        useTwoPaneLayout = useTwoPaneLayout,
+                        onSignOut = {
+                            viewModel.logout()
+                        }
+                    )
+                }
             }
         }
     }

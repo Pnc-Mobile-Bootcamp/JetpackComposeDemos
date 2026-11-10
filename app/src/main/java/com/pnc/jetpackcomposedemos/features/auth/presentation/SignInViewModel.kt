@@ -37,6 +37,15 @@ class SignInViewModel @Inject constructor(
         return oidc.beginSignIn().toString()
     }
 
+    // This ViewModel outlives the sign-in screen. Once the success has been handed to the
+    // session, forget it - otherwise the screen would hand the same (old) user over again the
+    // next time it is shown, e.g. right after signing out.
+    fun onSignInHandled() {
+        if (_uiState.value is SignInState.Success) {
+            _uiState.value = SignInState.Idle
+        }
+    }
+
 }
 
 

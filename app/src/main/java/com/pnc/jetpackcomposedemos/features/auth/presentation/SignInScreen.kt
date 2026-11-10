@@ -56,7 +56,10 @@ fun SignInScreen(
             is SignInState.Exchanging -> CircularProgressIndicator()
             is SignInState.Success -> {
                 Text(stringResource(R.string.common_welcome, current.user.username))
-                LaunchedEffect(current.user) { onSignIn(current.user) }
+                LaunchedEffect(current.user) {
+                    onSignIn(current.user)
+                    viewModel.onSignInHandled()
+                }
             }
             is SignInState.Error -> Text(
                 stringResource(R.string.common_error, current.message),
