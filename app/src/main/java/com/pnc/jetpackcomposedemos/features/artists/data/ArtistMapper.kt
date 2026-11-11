@@ -4,7 +4,7 @@ import com.pnc.jetpackcomposedemos.features.artists.domain.Artist
 
 object ArtistMapper {
 
-    fun mapToDomain(dto: ArtistDto): Artist {
+    fun mapToDomain(dto: ArtistDto, isAvailable: Boolean = false): Artist {
         return Artist(
             id = dto.id,
             name = dto.name,
