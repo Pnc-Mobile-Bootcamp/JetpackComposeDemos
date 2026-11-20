@@ -111,6 +111,9 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:common"))
+    implementation(project(":feature:todo"))
+    implementation(project(":core:designsystem"))
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.animation)
@@ -165,6 +168,10 @@ dependencies {
     implementation(libs.androidx.compose.material3.adaptive.navigation)
     implementation(libs.androidx.paging.compose)
     testImplementation(libs.androidx.paging.testing)
+    implementation(libs.androidx.work.runtime)
+    implementation(libs.androidx.hilt.work)
+    ksp(libs.androidx.hilt.compiler)
+    implementation(libs.timber)
 }
 
 configurations.configureEach {

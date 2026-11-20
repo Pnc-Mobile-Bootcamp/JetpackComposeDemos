@@ -13,7 +13,6 @@ import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.swipeLeft
 import androidx.compose.ui.unit.dp
-import androidx.test.espresso.action.ViewActions.doubleClick
 import com.pnc.jetpackcomposedemos.HiltTestActivity
 import com.pnc.jetpackcomposedemos.core.room.AppDatabase
 import com.pnc.jetpackcomposedemos.features.todo.data.ToDoDao

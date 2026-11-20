@@ -16,7 +16,11 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.hilt.work.HiltWorkerFactory
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.work.Configuration
+import com.pnc.jetpackcomposedemos.core.observability.CrashReporter
+import com.pnc.jetpackcomposedemos.core.observability.CrashReportingTree
 import com.pnc.jetpackcomposedemos.core.structure.EventPlannerApp
 import com.pnc.jetpackcomposedemos.core.settings.LocalAppSettings
 import com.pnc.jetpackcomposedemos.core.settings.SettingsViewModel
@@ -25,10 +29,47 @@ import com.pnc.jetpackcomposedemos.features.auth.data.oidc.OidcRedirects
 import com.pnc.jetpackcomposedemos.ui.theme.KazooTheme
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.HiltAndroidApp
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltAndroidApp
-class EventPlannerApplication: Application()
+class EventPlannerApplication: Application(), Configuration.Provider {
+
+    // Hilt's worker factory lets a worker's constructor ask for
+    // dependencies (such as repositories) to be injected
+    // the same way a view model can
+    @Inject
+    lateinit var workerFactory: HiltWorkerFactory
+
+    @Inject
+    lateinit var crashReporter: CrashReporter
+
+    override fun onCreate() {
+        super.onCreate()        // Hilt fills the @Inject fields here
+
+        // DebugTree prints to LogCat and should only be planted in debug builds
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
+        // CrashReportingTree should always be planted
+        Timber.plant(CrashReportingTree(crashReporter))
+
+        // last resort for an exception that nobody caught:
+        // write the report, then let Android finish crashing the app
+        val previousHandler = Thread.getDefaultUncaughtExceptionHandler()
+        Thread.setDefaultUncaughtExceptionHandler { thread, throwable ->
+            crashReporter.recordFatal(throwable)
+            previousHandler?.uncaughtException(thread, throwable)
+        }
+
+    }
+
+    override val workManagerConfiguration: Configuration
+        get() = Configuration.Builder()
+            .setWorkerFactory(workerFactory)
+            .build()
+
+}
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

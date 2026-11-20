@@ -10,6 +10,9 @@ interface SettingsRepository {
 
     suspend fun setShowArtistLocation(show: Boolean)
 
+    suspend fun setNotifyNewArtists(enabled: Boolean)
+
+
 }
 
 
